@@ -3,15 +3,15 @@
     "name": "etho-711",
     "slug": "etho-711",
     "version": "1.0.0",
-    "backgroundColor": "#fafafa",
+    "backgroundColor": "#FaFaFa",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "etho-711",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#fafafa"
+      "backgroundColor": "#FaFaFa"
     },
     "ios": {
       "supportsTablet": true
@@ -19,8 +19,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#fafafa"
-      }
+        "backgroundColor": "#FaFaFa"
+      },
+      "package": "com.nesredin.etho711"
     },
     "web": {
       "bundler": "metro",
@@ -30,6 +31,15 @@
     "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "32786f63-fa62-4c4d-acef-a3e02831317a"
+      }
+    },
+    "owner": "nesredin"
   }
 }

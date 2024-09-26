@@ -1,14 +1,15 @@
 import { MaterialIcons } from "@expo/vector-icons";
 
 export type Catagory = {
+  id: string;
   name: string;
-  icon: string;
+  imojji: string;
 };
 
 export type Meal = {
   id: string;
   name: string;
-  category: Catagory["name"];
+  category: Catagory;
   description: string;
   images: string[];
   price: number;

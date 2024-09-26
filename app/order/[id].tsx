@@ -1,14 +1,15 @@
-import { View, Text } from "react-native";
-import React, { useState } from "react";
+import { View, Text, Pressable, Alert } from "react-native";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import Button from "@/components/button";
 import { Images } from "@/utils/assets";
-import { useRouter } from "expo-router";
-
+import { router, useRouter } from "expo-router";
+import StepIndicator from "react-native-step-indicator";
 import MapView from "react-native-maps";
-
-import Stepper from "react-native-stepper-ui";
+import { HeaderWithBackTab } from "@/components/header";
+import { Colors } from "@/constants";
+import { neutral } from "@/utils";
 
 const ORDER_STATUS = [
   {
@@ -29,9 +30,21 @@ const Order = () => {
   const isEmptyOrder = false;
   const [activeStep, setActiveStep] = useState(0);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (activeStep + 1 < ORDER_STATUS.length) setActiveStep(activeStep + 1);
+      else setActiveStep(0);
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [activeStep]);
+
   if (isEmptyOrder) return <EmptyOrder />;
   return (
-    <SafeAreaView className="mt-2 h-full bg-background">
+    <SafeAreaView className=" h-full bg-background">
+      <View className="absolute top-8 left-4 z-[99]">
+        <HeaderWithBackTab onBackPress={() => router.back()} />
+      </View>
       <MapView
         className="w-full h-full"
         mapType="mutedStandard"
@@ -50,41 +63,38 @@ const Order = () => {
           <Text className="mb-1 text-xl font-semibold text-text">
             Preparing your order
           </Text>
-          <Text className="text-text/80">
-            Arrives between{" "}
-            <Text className="text-text font-medium">11:20PM-10:30AM</Text>
+          <Text className="text-neutral-500 mb-2">
+            Arrives between <Text className="text-text">11:20PM - 10:30AM</Text>
           </Text>
-
-          <Stepper
-            active={activeStep}
-            content={ORDER_STATUS.map((status) => (
-              <StepperStep
-                key={status.title}
-                title={status.title}
-                description={status.description}
-              />
-            ))}
-            onBack={() => {
-              setActiveStep((prev) => prev - 1);
-            }}
-            onNext={() => {
-              setActiveStep((prev) => prev + 1);
-            }}
-            onFinish={() => {}}
-            showButton={false}
-            stepStyle={{
-              backgroundColor: "#000",
-              borderColor: "#000",
-            }}
-            stepTextStyle={{
-              fontSize: 14,
-              fontWeight: "600",
-              color: "white",
-            }}
-            wrapperStyle={{
-              marginTop: 10,
+          <StepIndicator
+            labels={ORDER_STATUS.map((status) => status.title)}
+            stepCount={ORDER_STATUS.length}
+            currentPosition={activeStep}
+            customStyles={{
+              currentStepLabelColor: Colors.light.primary,
+              stepStrokeCurrentColor: Colors.light.primary,
+              labelColor: neutral(0.7, true),
+              stepIndicatorFinishedColor: Colors.light.primary,
+              stepIndicatorUnFinishedColor: Colors.light.primary,
+              currentStepIndicatorSize: 35,
+              stepIndicatorSize: 35,
+              separatorFinishedColor: Colors.light.primary,
+              separatorUnFinishedColor: neutral(0.1, true),
+              currentStepIndicatorLabelFontSize: 14,
+              stepIndicatorLabelFontSize: 14,
+              stepIndicatorLabelCurrentColor: Colors.light.primary,
+              stepIndicatorCurrentColor: "white",
             }}
           />
+          <View className="px-4">
+            <StepperStep
+              onPress={() => {
+                Alert.alert(activeStep + "");
+              }}
+              description={ORDER_STATUS[activeStep].description}
+              title={ORDER_STATUS[activeStep].title}
+            />
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -93,14 +103,15 @@ const Order = () => {
 
 type StepperStepProps = {
   title: string;
-  description: string;
+  description?: string;
+  onPress: () => void;
 };
-const StepperStep = ({ title, description }: StepperStepProps) => {
+const StepperStep = ({ title, description, onPress }: StepperStepProps) => {
   return (
-    <View className="py-2">
+    <Pressable className="py-2" onPress={onPress}>
       <Text className="text-lg text-text">{title}</Text>
-      <Text className="text-text/80">{description}</Text>
-    </View>
+      {description && <Text className="text-text/80">{description}</Text>}
+    </Pressable>
   );
 };
 

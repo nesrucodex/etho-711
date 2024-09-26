@@ -1,7 +1,7 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { HeaderWithBackTab } from "@/components/header";
+import { HeaderWithBackTab, TabHeader } from "@/components/header";
 import { router, useRouter } from "expo-router";
 import { Image } from "expo-image";
 import AddMealButton from "@/components/add-meal-button";
@@ -9,6 +9,8 @@ import Button, { LightButton } from "@/components/button";
 import { Cart as TCart, useCarts } from "@/hooks/use-cart";
 import { Images } from "@/utils/assets";
 import { useOrder } from "@/hooks/use-order";
+import { Feather } from "@expo/vector-icons";
+import EmptyList from "@/components/empty-list";
 
 const Cart = () => {
   const carts = useCarts((state) => state.items);
@@ -29,13 +31,27 @@ const Cart = () => {
     router.push("/(tabs)/orders");
   };
 
-  if (carts.length === 0) return <EmptyCart />;
+  if (carts.length === 0)
+    return (
+      <EmptyList
+        description="Your cart is empty, there are no items added yet."
+        buttonText="Add Meals"
+        onPress={() => router.push("/(tabs)/meals")}
+      />
+    );
 
   return (
     <SafeAreaView className="h-full bg-background">
-      <View className="px-4 py-4">
-        <Text className="text-2xl font-bold text-primary">Your Carts</Text>
-        <ScrollView className="mt-6" showsVerticalScrollIndicator={false}>
+      <View className="px-4 mt-2">
+        <TabHeader
+          title="Your carts"
+          rightComponent={
+            <View>
+              <Feather name="more-vertical" size={20} />
+            </View>
+          }
+        />
+        <ScrollView className="mt-4" showsVerticalScrollIndicator={false}>
           {carts.map((cart) => (
             <CartItem key={cart.id} cart={cart} />
           ))}
@@ -45,7 +61,7 @@ const Cart = () => {
       <View className="mt-4 flex-row justify-end px-4">
         <LightButton
           classNames={{
-            root: "w-[85] py-3",
+            root: "w-[85] h-[40]",
           }}
           onPress={() => clearCart()}
         >
@@ -127,33 +143,6 @@ export const CartSummaryRow = ({ title, value }: CartSummaryRowProps) => {
       <Text className="font-medium text-neutral-700">{title}</Text>
       <Text className="text-neutral-600">{value}</Text>
     </View>
-  );
-};
-
-const EmptyCart = () => {
-  const router = useRouter();
-  return (
-    <SafeAreaView className="h-full bg-background items-center justify-center px-8">
-      <View className="w-full">
-        <Image
-          source={Images.EmptyCart}
-          className="w-[50%] aspect-[1/1] mx-auto"
-          contentFit="contain"
-        />
-        <View className="mt-8">
-          <Text className="text-center text-lg font-semibold text-neutral-700">
-            Your cart is currently empty, and there are no items added yet.
-          </Text>
-
-          <Button
-            classNames={{ root: "w-[50%] mt-12 mx-auto" }}
-            onPress={() => router.push("/(tabs)/meals")}
-          >
-            Add meals
-          </Button>
-        </View>
-      </View>
-    </SafeAreaView>
   );
 };
 

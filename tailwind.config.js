@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -8,17 +9,17 @@ module.exports = {
           DEFAULT: "#1C1C1C",
         },
         primary: {
-          DEFAULT: "#1f1f1f",
-          50: "#eaeaea",
-          100: "#d4d4d4",
-          200: "#a6a6a6",
-          300: "#7a7a7a",
-          400: "#4f4f4f",
-          500: "#3b3b3b",
-          600: "#2a2a2a",
-          700: "#1f1f1f",
-          800: "#141414",
-          900: "#0a0a0a",
+          DEFAULT: "#FF8C00", // Default Orange
+          50: "#FFF4E5",
+          100: "#FFE4CC",
+          200: "#FFC999",
+          300: "#FFAD66",
+          400: "#FF9133",
+          500: "#FF8C00",
+          600: "#CC6F00",
+          700: "#995300",
+          800: "#663700",
+          900: "#331C00",
         },
         background: {
           DEFAULT: "#FaFaFa",
@@ -26,6 +27,13 @@ module.exports = {
         accent: {
           DEFAULT: "#0B735F",
         },
+      },
+      borderRadius: {
+        DEFAULT: "10px",
+        sm: "5px",
+        md: "10px",
+        lg: "15px",
+        xl: "20px",
       },
     },
   },

@@ -14,17 +14,17 @@ const ForgotPassword = () => {
         rightContent="Cancel"
         rightContentHref="/(auth)/sign-in"
         classNames={{
-          root: "mb-10",
+          root: "mb-4",
         }}
       />
-      <View>
-        <Text className="text-2xl font-semibold mb-4">Forgot Password</Text>
+      <View className="mb-4">
+        <Text className="text-2xl font-semibold mb-2">Forgot Password</Text>
         <Text className="text-neutral-600">
           Enter your email address to request a password reset.
         </Text>
       </View>
 
-      <View className="mt-8">
+      <View>
         <Input
           placeholder="nesru@gmail.com"
           label="Email Address"

@@ -15,7 +15,10 @@ type ButtonProps = {
 const Button = ({ children, classNames, onPress }: ButtonProps) => {
   return (
     <TouchableOpacity
-      className={cn("w-full bg-primary py-4 rounded-full", classNames?.root)}
+      className={cn(
+        "w-full h-[50] flex items-center justify-center bg-primary rounded",
+        classNames?.root
+      )}
       onPress={onPress}
       activeOpacity={0.75}
     >
@@ -38,7 +41,7 @@ export const SecondaryButton = ({
   return (
     <TouchableOpacity
       className={cn(
-        "w-full border border-primary py-4 rounded-full",
+        "w-full h-[50] flex items-center justify-center border border-primary py-4 rounded",
         classNames?.root
       )}
       onPress={onPress}
@@ -58,7 +61,10 @@ export const SecondaryButton = ({
 export const LightButton = ({ children, classNames, onPress }: ButtonProps) => {
   return (
     <TouchableOpacity
-      className={cn("w-full bg-primary/10 py-4 rounded-full", classNames?.root)}
+      className={cn(
+        "w-full h-[50] flex items-center justify-center bg-primary/10 rounded",
+        classNames?.root
+      )}
       onPress={onPress}
       activeOpacity={0.75}
     >
@@ -88,7 +94,7 @@ export const ButtonIcon = ({ icon, onPress, classNames }: ButtonIconProps) => {
       activeOpacity={0.75}
       onPress={onPress}
       className={cn(
-        "h-[40] w-[40] flex items-center justify-center bg-white rounded-full border border-neutral-100",
+        "h-[40] w-[40] flex items-center justify-center bg-white/50 rounded-sm",
         classNames?.root
       )}
     >

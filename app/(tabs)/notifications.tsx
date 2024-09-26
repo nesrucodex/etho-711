@@ -1,9 +1,11 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MaterialIcons } from "@expo/vector-icons"; // Import MaterialIcons from expo
+import { Feather, MaterialIcons } from "@expo/vector-icons"; // Import MaterialIcons from expo
 import { Notification } from "@/types/index";
-import { Colors } from "@/constants";
+import { LightButton } from "@/components/button";
+import { neutral } from "@/utils";
+import { TabHeader } from "@/components/header";
 
 const notifications: Notification[] = [
   {
@@ -28,10 +30,18 @@ const notifications: Notification[] = [
 
 const NotificationsScreen = () => {
   return (
-    <SafeAreaView className="flex-1 px-4  py-4 bg-background">
-      <Text className="text-2xl font-bold mb-6 text-primary">
-        Notifications
-      </Text>
+    <SafeAreaView className="flex-1 px-4 bg-background">
+      <View className="mb-4 mt-2">
+        <TabHeader
+          title="Notifications"
+          rightComponent={
+            <View>
+              <Feather name="more-vertical" size={20} />
+            </View>
+          }
+        />
+      </View>
+
       <FlatList
         data={notifications}
         keyExtractor={(item) => item.id}
@@ -58,11 +68,14 @@ const NotificationItem = ({
   description,
   icon,
 }: NotificationItemProps) => (
-  <View className="bg-white p-4 rounded-lg shadow-md border border-neutral-100 mb-4 flex-row items-center">
-    <MaterialIcons name={icon} size={30} color={Colors.light.primary} />
-    <View className="ml-2">
-      <Text className="text-lg font-bold text-gray-900">{title}</Text>
-      <Text className="text-gray-600">{description}</Text>
+  <View className="bg-white px-2 py-2.5 rounded-lg mb-2 flex-row items-center">
+    <MaterialIcons name={icon} size={25} color={neutral(0.85, true)} />
+    <View className="flex-1 ml-2">
+      <View className="flex-row items-center justify-between">
+        <Text className="text-base font-bold text-text">{title}</Text>
+        <Text className="text-[12px] text-neutral-500">2 min ago</Text>
+      </View>
+      <Text className="text-neutral-500">{description}</Text>
     </View>
   </View>
 );

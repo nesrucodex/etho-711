@@ -10,6 +10,7 @@ type AddMealButtonProps = {
   value?: number;
   onIncrement?: () => void;
   onDecrement?: () => void;
+  withMinus?: boolean;
 
   classNames?: {
     root?: ClassValue;
@@ -25,6 +26,7 @@ const AddMealButton = ({
   onDecrement,
   initialValue = 0,
   classNames,
+  withMinus = true,
 }: AddMealButtonProps) => {
   return (
     <View className={cn(classNames?.root)}>
@@ -43,14 +45,16 @@ const AddMealButton = ({
             classNames?.wrapper
           )}
         >
-          <ButtonIcon
-            classNames={{
-              root: cn("border-0 w-[40] h-[40]", classNames?.icon),
-            }}
-            onPress={onDecrement}
-            icon={<Feather name="minus" size={18} />}
-          />
-          <Text className={cn("mx-2 font-semibold", classNames?.count)}>
+          {withMinus && (
+            <ButtonIcon
+              classNames={{
+                root: cn("border-0 w-[40] h-[40]", classNames?.icon),
+              }}
+              onPress={onDecrement}
+              icon={<Feather name="minus" size={18} />}
+            />
+          )}
+          <Text className={cn("mx-3 font-semibold", classNames?.count)}>
             {value || initialValue}
           </Text>
           <ButtonIcon

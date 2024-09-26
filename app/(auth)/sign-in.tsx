@@ -11,19 +11,14 @@ const SignIn = () => {
     <SafeAreaView className="px-4 h-full bg-background">
       <Header
         classNames={{
-          root: "mb-10",
+          root: "mb-4",
         }}
       />
-      <View>
-        <Text className="text-2xl font-semibold mb-4">
-          Sign in to your account
-        </Text>
-        <Text className="text-neutral-600">
-          Good to see you again, enter your details below to continue ordering.
-        </Text>
+      <View className="mb-4">
+        <Text className="text-2xl font-semibold">Sign in to your account</Text>
       </View>
 
-      <ScrollView className="mt-8">
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Input
           placeholder="nesru@gmail.com"
           label="Email Address"
@@ -38,19 +33,26 @@ const SignIn = () => {
         />
       </ScrollView>
       <View className="mt-auto mb-8">
-        <Button>Sign In</Button>
-        <Link href="/(auth)/sign-up" className="mt-4 text-neutral-600">
-          If you don't have account,{" "}
-          <Text className="text-primary">Sign up</Text>
-        </Link>
-        <Link
-          // ts-ignore
-          href={"/(auth)/forgot-password" as Href<string>}
-          className="mt-2 text-neutral-600"
+        <Button
+          classNames={{
+            root: "mb-2",
+          }}
         >
+          Sign In
+        </Button>
+        <Text>
+          If you don't have account,{" "}
+          <Link href="/(auth)/sign-up" className="text-primary">
+            sign up.
+          </Link>{" "}
           If you forgot your password,{" "}
-          <Text className="text-primary">Reset password</Text>
-        </Link>
+          <Link
+            href={"/(auth)/forgot-password" as Href<string>}
+            className="text-primary"
+          >
+            reset password.
+          </Link>
+        </Text>
       </View>
     </SafeAreaView>
   );

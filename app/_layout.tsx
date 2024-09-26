@@ -47,7 +47,7 @@ export default function RootLayout() {
       <Stack.Screen
         name="[id]"
         options={{
-          presentation: "formSheet",
+          presentation: "fullScreenModal",
         }}
       />
     </Stack>

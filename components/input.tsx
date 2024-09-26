@@ -38,13 +38,13 @@ const Input = ({
   return (
     <View className={cn("", classNames?.root)}>
       {label && (
-        <Text className={cn("text-neutral-500 pl-4 mb-1", classNames?.label)}>
+        <Text className={cn("text-neutral-500 pl-2 mb-1", classNames?.label)}>
           {label}
         </Text>
       )}
       <View
         className={cn(
-          "h-[54] border border-neutral-400  rounded-full transition focus:border-primary",
+          "h-[50] border border-neutral-400 rounded transition focus:border-primary",
           { "flex-row": secureTextEntry },
           classNames?.inputWrapper
         )}

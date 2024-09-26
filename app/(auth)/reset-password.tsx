@@ -14,17 +14,17 @@ const ResetPassword = () => {
         rightContent="Cancel"
         rightContentHref="/(auth)/sign-in"
         classNames={{
-          root: "mb-10",
+          root: "mb-4",
         }}
       />
-      <View>
-        <Text className="text-2xl font-semibold mb-4">Reset Password</Text>
+      <View className="mb-4">
+        <Text className="text-2xl font-semibold mb-2">Reset Password</Text>
         <Text className="text-neutral-600">
           A rest code has been sent to your email.
         </Text>
       </View>
 
-      <View className="mt-8 px-2">
+      <View>
         <OtpInput
           numberOfDigits={5}
           type="numeric"
@@ -33,7 +33,15 @@ const ResetPassword = () => {
               gap: 0,
               columnGap: 0,
             },
-            pinCodeContainerStyle: { borderColor: Colors.light.text },
+
+            pinCodeTextStyle: {
+              fontSize: 20,
+            },
+            pinCodeContainerStyle: {
+              borderColor: Colors.light.text,
+              height: 50,
+              width: 55,
+            },
             focusedPinCodeContainerStyle: {
               borderColor: Colors.light.primary,
             },

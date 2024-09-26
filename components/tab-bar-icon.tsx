@@ -3,9 +3,10 @@ import React from "react";
 
 import { Feather } from "@expo/vector-icons";
 import { cn } from "@/libs/cn";
-import { Colors, TABS } from "@/constants";
+import { TABS } from "@/constants";
 import { neutral } from "@/utils";
 import { useCarts } from "@/hooks/use-cart";
+import { useOrder } from "@/hooks/use-order";
 
 type TabBarIconProps = {
   name: keyof typeof Feather.glyphMap;
@@ -23,6 +24,8 @@ const TabBarIcon = ({ name, title, color, focused }: TabBarIconProps) => {
   const notificationsCount = 1;
   const cartsCount = useCarts((state) => state.items).length;
   const showCartsBadge = isCart && cartsCount !== 0;
+  const isOrders = title === TABS.orders;
+  const orderCount = useOrder((order) => order.orders).length;
 
   return (
     <View
@@ -45,6 +48,11 @@ const TabBarIcon = ({ name, title, color, focused }: TabBarIconProps) => {
             <Text className="text-[10px] text-white ">
               {notificationsCount}
             </Text>
+          </View>
+        )}
+        {isOrders && orderCount > 0 && (
+          <View className="absolute w-4 h-4 items-center justify-center rounded-full -top-3 -right-3 bg-red-500">
+            <Text className="text-[10px] text-white ">{orderCount}</Text>
           </View>
         )}
       </View>
