@@ -41,7 +41,7 @@ const AddMealButton = ({
       ) : (
         <View
           className={cn(
-            "flex-row items-center bg-neutral-100 rounded-full",
+            "p-1 flex-row items-center bg-neutral-100 rounded-full",
             classNames?.wrapper
           )}
         >

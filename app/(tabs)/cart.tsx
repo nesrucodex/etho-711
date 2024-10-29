@@ -1,16 +1,17 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { HeaderWithBackTab, TabHeader } from "@/components/header";
-import { router, useRouter } from "expo-router";
+import { TabHeader } from "@/components/header";
+import { router } from "expo-router";
 import { Image } from "expo-image";
 import AddMealButton from "@/components/add-meal-button";
 import Button, { LightButton } from "@/components/button";
 import { Cart as TCart, useCarts } from "@/hooks/use-cart";
-import { Images } from "@/utils/assets";
 import { useOrder } from "@/hooks/use-order";
 import { Feather } from "@expo/vector-icons";
 import EmptyList from "@/components/empty-list";
+
+import { Picker } from "@react-native-picker/picker";
 
 const Cart = () => {
   const carts = useCarts((state) => state.items);

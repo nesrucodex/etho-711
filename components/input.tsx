@@ -44,7 +44,7 @@ const Input = ({
       )}
       <View
         className={cn(
-          "h-[50] border border-neutral-400 rounded transition focus:border-primary",
+          "h-[50] border border-neutral-400 rounded-full transition focus:border-primary",
           { "flex-row": secureTextEntry },
           classNames?.inputWrapper
         )}

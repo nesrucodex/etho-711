@@ -3,13 +3,12 @@ import React from "react";
 import TabBarIcon from "@/components/tab-bar-icon";
 import { Colors } from "@/constants/colors";
 import { TABS } from "@/constants";
-import { View } from "react-native";
-import { neutral } from "@/utils";
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
+        tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: Colors["light"].tint,
         headerShown: false,
         tabBarShowLabel: false,

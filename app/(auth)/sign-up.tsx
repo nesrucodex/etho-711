@@ -20,8 +20,8 @@ const SignUp = () => {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <Input
-          placeholder="nesru@gmail.com"
-          label="Email Address"
+          placeholder="nesru muhammed"
+          label="Name"
           classNames={{ root: "mb-3" }}
         />
         <Input
@@ -33,6 +33,12 @@ const SignUp = () => {
         <Input
           placeholder="********"
           label="Password"
+          classNames={{ root: "mb-3" }}
+          secureTextEntry
+        />
+        <Input
+          placeholder="********"
+          label="Confirm Password"
           classNames={{ root: "mb-3" }}
           secureTextEntry
         />

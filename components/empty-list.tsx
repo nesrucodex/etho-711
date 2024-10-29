@@ -1,19 +1,33 @@
 import { Images } from "@/utils/assets";
 import { Image } from "expo-image";
-import { Text } from "react-native";
-import { View } from "react-native-reanimated/lib/typescript/Animated";
+import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "./button";
+import { ClassValue } from "clsx";
+import { cn } from "@/libs/cn";
 
 type EmptyListProps = {
   description?: string;
   buttonText?: string;
   onPress?: () => void;
+  classNames?: {
+    root?: ClassValue;
+  };
 };
 
-const EmptyList = ({ description, buttonText, onPress }: EmptyListProps) => {
+const EmptyList = ({
+  description,
+  buttonText,
+  onPress,
+  classNames,
+}: EmptyListProps) => {
   return (
-    <SafeAreaView className="h-full bg-background items-center justify-center px-8">
+    <SafeAreaView
+      className={cn(
+        "h-full bg-background items-center justify-center px-8",
+        classNames?.root
+      )}
+    >
       <View className="w-full">
         <Image
           source={Images.Empty}
@@ -26,7 +40,7 @@ const EmptyList = ({ description, buttonText, onPress }: EmptyListProps) => {
           </Text>
           {buttonText && (
             <Button
-              classNames={{ root: "w-[50%] mt-12 mx-auto" }}
+              classNames={{ root: "w-[60%] mt-12 mx-auto" }}
               onPress={() => onPress?.()}
             >
               {buttonText}

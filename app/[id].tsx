@@ -3,11 +3,9 @@ import React, { useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { Feather } from "@expo/vector-icons";
 import PagerView from "react-native-pager-view";
 import { CarouselIndicator, CarouselItem } from "@/components/carousel";
 
-import Button, { ButtonIcon } from "@/components/button";
 import { HeaderWithBackTab } from "@/components/header";
 import { Group } from "@/components/layout";
 import { RattingWithRep } from "@/components/ratting";
@@ -15,6 +13,9 @@ import AddMealButton from "@/components/add-meal-button";
 import { useMeals } from "@/hooks/use-meals";
 import { useCarts } from "@/hooks/use-cart";
 import { StatusBar } from "expo-status-bar";
+import { ButtonIcon } from "@/components/button";
+import { Feather } from "@expo/vector-icons";
+import { Colors } from "@/constants";
 
 const Detail = () => {
   const { id } = useLocalSearchParams();
@@ -54,9 +55,19 @@ const Detail = () => {
   return (
     <View className="h-full bg-background">
       <StatusBar translucent />
-      <View className="absolute top-6 left-4 z-[99]">
+      <View className="absolute top-8 left-0 px-4 z-[99]">
         <HeaderWithBackTab
           // title={meal.name}
+          rightComponent={
+            <ButtonIcon
+              classNames={{
+                root: "bg-white/90",
+              }}
+              icon={
+                <Feather name="heart" color={Colors.light.primary} size={20} />
+              }
+            />
+          }
           onBackPress={() => router.back()}
         />
       </View>

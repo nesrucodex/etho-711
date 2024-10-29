@@ -20,8 +20,8 @@ const SignIn = () => {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <Input
-          placeholder="nesru@gmail.com"
-          label="Email Address"
+          placeholder="nesru muhammed"
+          label="Name"
           classNames={{ root: "mb-3" }}
         />
 

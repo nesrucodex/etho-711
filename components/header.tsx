@@ -35,7 +35,7 @@ const Header = ({
       <Link
         href={rightContentHref}
         className={cn(
-          "absolute top-0-translate-y-1/2 right-0 text-primary font-semibold",
+          "absolute top-0-translate-y-1/2 right-0 text-[14px] text-primary font-semibold",
           classNames?.text
         )}
       >
@@ -48,23 +48,28 @@ const Header = ({
 type HeaderWithBackTab = {
   onBackPress: () => void;
   title?: string;
+  rightComponent?: ReactNode;
 };
 export const HeaderWithBackTab = ({
   title,
   onBackPress,
+  rightComponent,
 }: HeaderWithBackTab) => {
   return (
-    <View className="flex-row items-center">
-      <ButtonIcon
-        classNames={{
-          root: "bg-white/50",
-        }}
-        onPress={() => onBackPress()}
-        icon={<Feather name="arrow-left" size={25} />}
-      />
-      {title && (
-        <Text className="ml-4 text-xl  font-semibold text-text">{title}</Text>
-      )}
+    <View className="w-full flex-row justify-between items-center">
+      <View className="flex-row items-center">
+        <ButtonIcon
+          classNames={{
+            root: "bg-white/90",
+          }}
+          onPress={() => onBackPress()}
+          icon={<Feather name="arrow-left" size={25} />}
+        />
+        {title && (
+          <Text className="ml-4 text-xl font-semibold text-text">{title}</Text>
+        )}
+      </View>
+      {rightComponent}
     </View>
   );
 };
@@ -84,7 +89,9 @@ export const TabHeader = ({
   classNames,
 }: TabHeaderProps) => {
   return (
-    <View className={cn("flex-row justify-between items-center", classNames?.root)}>
+    <View
+      className={cn("flex-row justify-between items-center", classNames?.root)}
+    >
       <Text className={cn("text-xl font-semibold text-text", classNames?.text)}>
         {title}
       </Text>
