@@ -12,7 +12,7 @@ export const PRIMARY_COLORS = {
   900: "#331C00",
 };
 
-export const Colors = {
+export default {
   light: {
     primary: PRIMARY_COLORS.DEFAULT,
     accent: "#0B735F",

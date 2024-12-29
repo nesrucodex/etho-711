@@ -1,21 +1,27 @@
-export { Colors } from "./colors";
+import Colors from "./Colors";
 
-export const CATAGORIES = [
+export { Colors };
+
+type Catagory = {
+  name: string;
+  emoji: string;
+};
+export const CATAGORIES: Catagory[] = [
   {
     name: "All",
-    icon: "😋",
+    emoji: "😋",
   },
   {
     name: "Pizza",
-    icon: "🍕",
+    emoji: "🍕",
   },
   {
     name: "Burger",
-    icon: "🍔",
+    emoji: "🍔",
   },
   {
     name: "Drinks",
-    icon: "🍸",
+    emoji: "🍸",
   },
 ];
 
