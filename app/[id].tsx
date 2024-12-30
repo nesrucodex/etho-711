@@ -1,4 +1,11 @@
-import { View, Text, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
 import React, { useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -14,8 +21,7 @@ import { useMeals } from "@/hooks/use-meals";
 import { useCarts } from "@/hooks/use-cart";
 import { StatusBar } from "expo-status-bar";
 import { ButtonIcon } from "@/components/button";
-import { Feather } from "@expo/vector-icons";
-import { Colors } from "@/constants";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 
 const Detail = () => {
   const { id } = useLocalSearchParams();
@@ -24,6 +30,17 @@ const Detail = () => {
   const [activeItem, setActiveItem] = useState(0);
   const meals = useMeals((state) => state.meals);
   const { incrementQuantity, decrementQuantity, items } = useCarts();
+
+  const [feedbacks, setFeedbacks] = useState<
+    {
+      username: string;
+      feed: string;
+      date: Date;
+    }[]
+  >([]);
+
+  const [feedbackContent, setFeedbackContent] = useState("");
+  const [isFeedModalOpended, setIsFeddModalOpened] = useState(false);
 
   const cart = items.find((item) => item.meal.id === id);
 
@@ -54,6 +71,60 @@ const Detail = () => {
 
   return (
     <View className="h-full bg-background">
+      <Modal
+        visible={isFeedModalOpended}
+        animationType="slide"
+        // transparent
+
+        onRequestClose={() => {}}
+      >
+        <View className="px-4 mt-4">
+          <View className="flex flex-row justify-end">
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => {
+                setIsFeddModalOpened(false);
+              }}
+            >
+              <MaterialIcons name="cancel" size={35} />
+            </TouchableOpacity>
+          </View>
+          <View className="rounded-lg">
+            <Text className="text-lg font-bold mb-2">Feedback</Text>
+            <TextInput
+              value={feedbackContent}
+              onChange={(e) => {
+                setFeedbackContent(e.nativeEvent.text);
+              }}
+              className="h-24 border border-gray-200 rounded-sm bg-white px-3 py-2"
+              multiline
+              placeholder="Write your feedback here..."
+              placeholderTextColor="#A0A0A0"
+              textAlignVertical="top"
+            />
+            <TouchableOpacity
+              activeOpacity={0.75}
+              className="bg-primary mt-4 py-2.5 rounded-full"
+              onPress={() => {
+                setIsFeddModalOpened(false);
+                setFeedbacks([
+                  {
+                    username: "nesrucodex",
+                    feed: feedbackContent,
+                    date: new Date(),
+                  },
+                  ...feedbacks,
+                ]);
+                setFeedbackContent("");
+              }}
+            >
+              <Text className="text-white text-center">
+                Submit
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
       <StatusBar translucent />
       <View className="absolute top-8 left-0 px-4 z-[99]">
         <HeaderWithBackTab
@@ -63,9 +134,7 @@ const Detail = () => {
               classNames={{
                 root: "bg-white/90",
               }}
-              icon={
-                <Feather name="heart" color={Colors.light.primary} size={20} />
-              }
+              icon={<Feather name="heart" size={20} />}
             />
           }
           onBackPress={() => router.back()}
@@ -119,21 +188,32 @@ const Detail = () => {
         </View>
 
         <Group>
-          <RattingWithRep ratting={meal.rating} withRatingNumber={false} />
-          <Text className="text-neutral-600 ml-2">{meal.rating} Rating</Text>
+          <RattingWithRep ratting={meal.rating} withRatingNumber={true} />
         </Group>
 
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          className="mt-4 pb-8 h-[160]"
-        >
-          <View>
+        <View>
+          <Text className="text-base font-medium  text-text">Description</Text>
+          <Text className="text-neutral-500">{meal.description}</Text>
+        </View>
+
+        <View className="mt-2">
+          <View className="flex flex-row justify-between items-center border-b border-b-gray-200 pb-2 mb-2">
             <Text className="text-base font-medium  text-text">
-              Description
+              Customer Feedbacks
             </Text>
-            <Text className="text-neutral-500">{meal.description}</Text>
+            <TouchableOpacity
+              className="border-[1.4px] border-primary px-4 py-2 rounded-full"
+              onPress={() => setIsFeddModalOpened(true)}
+            >
+              <Text className="text-xs">Add Feed</Text>
+            </TouchableOpacity>
           </View>
-        </ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false} horizontal={false}>
+            {feedbacks.map((feedback, index) => {
+              return <Feedback key={index} feedback={feedback} />;
+            })}
+          </ScrollView>
+        </View>
       </View>
 
       <View className="mt-auto px-4 pt-2 pb-2 border border-neutral-200 bg-white rounded-t-[25px] ">
@@ -157,6 +237,30 @@ const Detail = () => {
           />
         </View>
       </View>
+    </View>
+  );
+};
+
+type FeedbackProps = {
+  feedback: {
+    username: string;
+    feed: string;
+    date: Date;
+  };
+};
+
+const Feedback = ({ feedback }: FeedbackProps) => {
+  return (
+    <View className="flex flex-row items-center border-b-gray-100  border-b pb-4">
+      <View className="border w-[40] h-[40] border-primary-500 rounded-full mr-3 flex items-center justify-center">
+        <Text className="font-bold bg-gray-100">
+          {feedback.username[0].toUpperCase()}
+        </Text>
+      </View>
+      <Text>{feedback.feed}</Text>
+      <Text className="ml-auto text-gray-500 italic text-xs">
+        {feedback.date.toLocaleString()}
+      </Text>
     </View>
   );
 };
