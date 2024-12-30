@@ -2,11 +2,13 @@
 
 **etho-711** is a mobile application developed using [Expo](https://expo.dev/), a framework for building React Native apps. This project was initialized with `create-expo-app` and utilizes TypeScript for type safety.
 
+
 ## ✨ Features
 
 - 🚀 **File-Based Routing**: Implements navigation based on the file structure within the `app` directory.
 - 🎨 **Tailwind CSS Integration**: Utilizes Tailwind CSS for styling, configured through `nativewind`.
 - 🔒 **TypeScript Support**: Ensures type safety and better developer experience.
+
 
 ## 📦 Installation
 
@@ -25,7 +27,7 @@ Follow these steps to set up the project locally:
       ```bash
       npm install
 
-2. **Start Server**:
+3. **Start Server**:
 
    To start the development server, run:
 
@@ -38,6 +40,7 @@ Follow these steps to set up the project locally:
 - 🍎 iOS simulator
 - 📲 Physical device using the Expo Go app
 
+
   
 ## 🛠️ Usage
 After setting up the project:
@@ -46,12 +49,14 @@ After setting up the project:
 - 🧭 Navigate: Add new screens or components within the app directory to utilize file-based routing.
 - 🎨 Style: Use Tailwind CSS classes in your components for styling.
 
-  
+
+
 ## Summary of Implemented Functions
 - ⚙️ Expo Integration: Leverages Expo's robust environment for React Native development.
 - 🛡️ TypeScript Support: Ensures type safety and improved developer experience.
 - 💅 Tailwind CSS Styling: Employs utility-first CSS framework for rapid UI development.
 - 🔗 File-Based Routing: Simplifies navigation setup through the project’s file structure.
+
 
  
 ## 📚 Additional Information
