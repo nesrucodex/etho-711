@@ -32,12 +32,12 @@ const TabBarIcon = ({ name, title, color, focused }: TabBarIconProps) => {
       className={cn(
         "w-10 h-10 justify-center items-center rounded-full transition-all duration-400 ",
         {
-          "bg-primary -top-0.5": focused,
+          "bg-black -top-0.5": focused,
         }
       )}
     >
       <View className="relative">
-        <Feather name={name} size={18} color={iconColor} />
+        <Feather name={name} size={18} color={focused ? "#ffffff": iconColor} />
         {showCartsBadge && (
           <View className="absolute w-4 h-4 items-center justify-center rounded-full -top-3 -right-3 bg-red-500">
             <Text className="text-[10px] text-white ">{cartsCount}</Text>
