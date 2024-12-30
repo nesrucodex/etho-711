@@ -17,15 +17,14 @@ import { Catagory, Meal } from "@/types/index";
 import { ButtonIcon } from "@/components/button";
 import { RattingWithRep } from "@/components/ratting";
 import AddMealButton from "../../components/add-meal-button";
-import { useMeals } from "@/hooks/use-meals";
+import { DUMMY_CATEGORIES, useMeals } from "@/hooks/use-meals";
 import { useCarts } from "@/hooks/use-cart";
 import { useDebounce } from "use-debounce";
 import EmptyList from "@/components/empty-list";
 
 const ALL_CATEGORY: Catagory = {
-  id: "000",
   name: "All",
-  imojji: "😋",
+  emoji: "😋",
 };
 
 const Meals = () => {
@@ -51,7 +50,7 @@ const Meals = () => {
 
   // Drived states
   let filteredMeals = meals;
-  const categories = [ALL_CATEGORY, ...meals.map((meal) => meal.category)];
+  const categories = [ALL_CATEGORY, ...DUMMY_CATEGORIES];
 
   if (activeCategory !== ALL_CATEGORY.name)
     filteredMeals = meals.filter(
@@ -70,7 +69,7 @@ const Meals = () => {
       {/* <Header /> */}
       <View className="mb-4 flex-row justify-between items-center">
         {!isSearchInputOpened && (
-          <Text className="font-semibold text-xl text-primary">
+          <Text className="font-semibold text-xl">
             <MaterialIcons name="fastfood" size={30} color={"#111"} />
             Etho711
           </Text>
@@ -120,7 +119,7 @@ const Meals = () => {
           className="mb-[120px]"
           keyExtractor={({ id }) => id}
           ItemSeparatorComponent={() => (
-            <View className="my-2 w-full h-[0.5px] bg-primary-200"></View>
+            <View className="my-2 w-full h-[0.5px] bg-primary-100"></View>
           )}
           renderItem={({ item, index }) => (
             <TouchableOpacity
@@ -214,7 +213,7 @@ const Catagories = ({
   return (
     <FlatList
       data={categories}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.name}
       className="mb-6"
       horizontal
       showsHorizontalScrollIndicator={false}
@@ -226,7 +225,7 @@ const Catagories = ({
           <CategoryItem
             isActive={item.name === activeCategory}
             name={item.name}
-            imojji={item.imojji}
+            emoji={item.emoji}
           />
         </TouchableOpacity>
       )}
@@ -235,21 +234,17 @@ const Catagories = ({
 };
 
 type CategoryItemProps = {
-  imojji: string;
+  emoji: string;
   name: string;
   isActive?: boolean;
 };
-const CategoryItem = ({
-  name,
-  imojji,
-  isActive = false,
-}: CategoryItemProps) => {
+const CategoryItem = ({ name, emoji, isActive = false }: CategoryItemProps) => {
   return (
     <View
       className={cn(
         "mr-4 flex-row justify-center items-center rounded-full pr-4 pl-2 py-2 bg-neutral-100",
         {
-          "bg-primary": isActive,
+          "bg-primary-100": isActive,
         }
       )}
     >
@@ -261,11 +256,11 @@ const CategoryItem = ({
           }
         )}
       >
-        <Text className={"text-[20px]"}>{imojji}</Text>
+        <Text className={"text-[20px]"}>{emoji}</Text>
       </View>
       <Text
         className={cn("text-xs font-medium", {
-          "text-white": isActive,
+          // "text-white": isActive,
         })}
       >
         {name}
@@ -320,7 +315,8 @@ const MealCard = ({ meal, classNames }: MealCardProps) => {
 
         <View className="mt-auto flex-row justify-between items-center">
           <Text className={cn("font-medium", classNames?.price)}>
-            ${meal.price}
+            <Text className="text-[10px]">ETB</Text>
+            {meal.price}
           </Text>
           <AddMealButton
             classNames={{
