@@ -20,42 +20,39 @@ Follow these steps to set up the project locally:
 
 2. **Install Dependencies**:
 
-Ensure you have [Node.js](https://nodejs.org/) installed, then run:
+   Ensure you have [Node.js](https://nodejs.org/) installed, then run:
 
-```bash
-npm install
+      ```bash
+      npm install
 
-Start the Development Server
-To start the development server, run:
+2. **Start Server**:
 
-bash
-Copy code
-npx expo start
-This will start the Expo development server. You can run the app on:
+   To start the development server, run:
 
-📱 Android emulator
-🍎 iOS simulator
-📲 Physical device using the Expo Go app
-🛠️ Usage
+      ```bash
+      npx expo start
+      
+##  This will start the Expo development server. You can run the app on:
+
+- 📱 Android emulator
+- 🍎 iOS simulator
+- 📲 Physical device using the Expo Go app
+
+  
+## 🛠️ Usage
 After setting up the project:
 
-🏗️ Develop: Modify files in the app directory to implement new features or adjust existing ones.
-🧭 Navigate: Add new screens or components within the app directory to utilize file-based routing.
-🎨 Style: Use Tailwind CSS classes in your components for styling.
-📋 Summary of Implemented Functions
-⚙️ Expo Integration: Leverages Expo's robust environment for React Native development.
-🛡️ TypeScript Support: Ensures type safety and improved developer experience.
-💅 Tailwind CSS Styling: Employs utility-first CSS framework for rapid UI development.
-🔗 File-Based Routing: Simplifies navigation setup through the project’s file structure.
-📚 Additional Information
+- 🏗️ Develop: Modify files in the app directory to implement new features or adjust existing ones.
+- 🧭 Navigate: Add new screens or components within the app directory to utilize file-based routing.
+- 🎨 Style: Use Tailwind CSS classes in your components for styling.
+
+  
+## Summary of Implemented Functions
+- ⚙️ Expo Integration: Leverages Expo's robust environment for React Native development.
+- 🛡️ TypeScript Support: Ensures type safety and improved developer experience.
+- 💅 Tailwind CSS Styling: Employs utility-first CSS framework for rapid UI development.
+- 🔗 File-Based Routing: Simplifies navigation setup through the project’s file structure.
+
+ 
+## 📚 Additional Information
 For detailed information, please refer to the source code and comments within the repository. Contributions are welcome! 😊
-
-Copy code
-
-
-
-
-
-
-
-
